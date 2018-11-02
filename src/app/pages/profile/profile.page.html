@@ -1,0 +1,134 @@
+<ion-header>
+  <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+          <ion-back-button text="Home" defaultHref="/home"></ion-back-button>
+        </ion-buttons>
+        <ion-buttons slot="end">  
+            <ion-button text="Home" (click)="onSubmit()"><ion-icon name="checkmark"></ion-icon></ion-button>
+          </ion-buttons>
+    <ion-title>User Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row padding >
+    <ion-col col-1 text-center>
+      <img class="avatar" (click)="takePicture()" [src]="user.avatar" alt="Ash" />
+      <div class="username" (click)="presentPrompt()">{{user.fullName}}</div>
+      <div class="bio">{{user.profile.about}}<p>
+      </div>
+    </ion-col>
+  </ion-row>
+
+  <!-- Segments -->
+  <div>
+    <ion-segment [(ngModel)]="profile_segment">
+      <ion-segment-button value="basic" sel >
+        <ion-icon name="apps"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="list">
+        <ion-icon name="list"></ion-icon>
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+
+  <!--Form with all-->
+  <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+
+    <!-- Segment content -->
+    <div [ngSwitch]="profileSegment">
+      <ion-list *ngSwitchCase="'basic'">
+        <ion-item-group>    
+            <ion-item>
+                <ion-label>Name</ion-label>
+                <ion-input formControlName="fullName"></ion-input> 
+            </ion-item>
+            <ion-item>
+                <ion-label>Display Name</ion-label>
+                <ion-input formControlName="displayName"></ion-input> 
+            </ion-item>
+            <ion-item>
+                <ion-label>Public Profile</ion-label>
+                <ion-toggle formControlName="isPublic" ></ion-toggle>
+            </ion-item>
+        </ion-item-group>    
+       
+        <!--music profile-->
+        <ion-item-group formGroupName="profile">    
+        <ion-item>
+          <ion-label>Instrument</ion-label>
+          <ion-select multiple="false" value='GUITAR' cancel-text="Cancel" ok-text="OK" formControlName="instrument">
+            <ion-select-option *ngFor="let instrument of instrumentList" value={{instrument.code}}>{{instrument.name}}</ion-select-option>
+          </ion-select>
+
+        </ion-item>
+        <ion-item>
+          <ion-label>Experience Level</ion-label>
+          <ion-select (change)="updateProfile()" multiple="false" cancelText="Cancel" okText="OK" formControlName="experience">
+            <ion-select-option *ngFor="let exp of expLevelList" value={{exp.code}}>{{exp.name}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Style +</ion-label>
+            <ion-input [value]="newStyle" (input)="newStyle = $event.target.value"  >
+              <ion-button fill="outline" (click)="addStyle(newStyle)"><ion-icon name="checkmark"></ion-icon></ion-button>
+            </ion-input>
+        </ion-item>
+
+        <ion-item>
+          <p>
+            <ion-chip *ngFor="let style of styles.controls; let i=index">
+              <ion-label>{{style.value}}</ion-label>
+              <ion-chip-button (click)="deleteStyle(i)">
+                <ion-icon name="close"></ion-icon>
+              </ion-chip-button>
+            </ion-chip>
+          </p>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Influence +</ion-label>
+          <ion-input [value]="newInfluence" (input)="newInfluence = $event.target.value"  >
+            <ion-button fill="outline" (click)="addInfluence(newInfluence)"><ion-icon name="checkmark"></ion-icon></ion-button>
+          </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <p>
+          <ion-chip *ngFor="let influence of influencies.controls; let i=index">
+            <ion-label>{{influence.value}}</ion-label>
+            <ion-chip-button (click)="deleteInfluence(i)">
+              <ion-icon name="close"></ion-icon>
+            </ion-chip-button>
+          </ion-chip>
+        </p>
+      </ion-item>
+
+    
+      </ion-item-group>
+
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'list'">
+        <ion-item-group>
+
+            <ion-item-divider light>Social Accounts</ion-item-divider>
+            <ion-item>
+              <ion-label>Facebook</ion-label>
+              <ion-toggle disabled checked="false"></ion-toggle>
+            </ion-item>
+            <ion-item>
+              <ion-label>Spotify</ion-label>
+              <ion-toggle (change)="connectSpotify()"></ion-toggle>
+            </ion-item>
+        </ion-item-group>    
+
+    </ion-list>
+    </div>
+
+  </form>
+
+
+   
+</ion-content>

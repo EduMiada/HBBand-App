@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="secondary">
+      <ion-button (click)="openPopover($event)">
+        <ion-icon slot="icon-only" name="contact"  ></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Hacking Bees Bands</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="card-background-page">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+  <ion-card *ngFor="let band of bands"  >
+    <ion-img [src]="band.image" (click)="openBand(band.id)" ></ion-img>
+    <div class="card-title"> {{band.name}} </div>
+    <div class="card-subtitle"> {{band.description}} </div>
+  </ion-card>
+
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="createBand()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>

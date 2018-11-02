@@ -5,6 +5,8 @@ import { TabsPage } from './tabs.page';
 import { HomePage } from '../home/home.page';
 import { AboutPage } from '../about/about.page';
 import { ContactPage } from '../contact/contact.page';
+import { BandPage } from '../pages/band/band.page';
+import { Route } from '@angular/compiler/src/core';
 
 const routes: Routes = [
   {
@@ -13,13 +15,13 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: '/tabs/(home:home)',
+        redirectTo: '/tabs/(band:id)',
         pathMatch: 'full',
       },
       {
-        path: 'home',
-        outlet: 'home',
-        component: HomePage
+        path: 'band/:id',
+        outlet: 'band',
+        component: BandPage
       },
       {
         path: 'about',
@@ -27,16 +29,11 @@ const routes: Routes = [
         component: AboutPage
       },
       {
-        path: 'contact',
-        outlet: 'contact',
+        path: 'contact/:id',
+        outlet: 'band',
         component: ContactPage
       }
     ]
-  },
-  {
-    path: '',
-    redirectTo: '/tabs/(home:home)',
-    pathMatch: 'full'
   }
 ];
 

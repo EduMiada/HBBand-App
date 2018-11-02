@@ -2,12 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-contact',
-  templateUrl: 'contact.page.html',
-  styleUrls: ['contact.page.scss']
+  selector: 'app-band',
+  templateUrl: './band.page.html',
+  styleUrls: ['./band.page.scss'],
 })
-export class ContactPage implements OnInit {
-  private bandID;
+export class BandPage implements OnInit {
+
+  private sub:any;
+  private bandID:any;
 
   constructor(private route:ActivatedRoute) { }
 
@@ -15,7 +17,7 @@ export class ContactPage implements OnInit {
     
      // subscribe to the parameters observable
   this.route.paramMap.subscribe(params => {
-    alert(params.get('id'));
+    //alert(params.get('id'));
     this.bandID = params.get('id');
   });
 

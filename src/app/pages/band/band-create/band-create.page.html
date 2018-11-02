@@ -1,0 +1,24 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-buttons (click)="closeModal()" slot="secondary">
+          <ion-button>
+            <ion-icon slot="icon-only" name="close"></ion-icon>
+          </ion-button>
+          <ion-button (click)="onSubmit()">
+              <ion-icon slot="icon-only" name="checkmark" ></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title>Create new Band</ion-title>
+      </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+    <form [formGroup]="bandForm">
+        <ion-item>
+          <ion-input required type="text" placeholder="name" formControlName="name"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input required type="string" placeholder="description" formControlName="description"></ion-input>
+        </ion-item>
+      </form>
+</ion-content>

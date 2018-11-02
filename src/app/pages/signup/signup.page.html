@@ -1,0 +1,41 @@
+
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Signup</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="signup-logo">
+    <img src="assets/images/appicon.svg" alt="Ionic Logo">
+  </div>
+  
+  <form [formGroup]="loginForm">
+    <ion-list lines="none">
+      <ion-item>
+        <ion-label position="stacked" color="primary">Username</ion-label>
+        <ion-input name="username" type="text" formControlName="username" required>
+        </ion-input>
+      </ion-item>
+      <ion-item>
+          <ion-label position="stacked" color="primary">e-mail</ion-label>
+          <ion-input name="username" type="text" formControlName="email" required>
+          </ion-input>
+        </ion-item>
+      <ion-item>
+          <ion-label position="stacked" color="primary">Password</ion-label>
+          <ion-input name="username" type="password" formControlName="password" required>
+          </ion-input>
+        </ion-item>
+    </ion-list>
+
+    <div padding>
+      <ion-button expand="block"  [disabled]="!loginForm.valid" (click)="onSignup()">Create User</ion-button>
+    </div>
+  </form>
+<!--[disabled]="!loginForm.valid"-->
+</ion-content>

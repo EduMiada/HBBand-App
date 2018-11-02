@@ -1,0 +1,23 @@
+<ion-content id="login-background">
+  <div padding id="cloud-layer">
+    <ion-row>
+      <ion-col>
+        <img src="assets/images/logo.png" />
+      </ion-col>
+    </ion-row>
+    
+    <form [formGroup]="loginForm">
+      <ion-item>
+        <ion-input required type="text" placeholder="email" formControlName="email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input required type="password" placeholder="password" formControlName="password"></ion-input>
+      </ion-item>
+
+
+      <ion-button class="login-button" shape="round" color="success" expand="block" [disabled]="!loginForm.valid" (click)="onSubmit()">Login</ion-button>
+      <ion-button class="login-button" shape="round" color="primary" expand="block" (click)="onSignup()">Signup</ion-button>
+
+    </form>
+  </div>
+</ion-content>
